@@ -19,6 +19,7 @@ Read this first. It resolves conflicts between the three spec documents and defi
 - **Part 2's `STORAGE_MODE` and `local` implementation are void.** There is no local mode. Supabase is the only store. Do not build a `Store` interface with two implementations — write directly against Supabase through server route handlers.
 - **Part 2's dev-only admin write route is void.** Admin is Supabase-backed and token-gated, reachable from a phone.
 - Part 1's rules, eligibility logic, catalog schema, seed script, and design tokens are **unchanged and authoritative**.
+- Part 1's RAWG seed script is void. Use 04-data-source-igdb.md for the data layer.
 
 ## Merged build order
 
