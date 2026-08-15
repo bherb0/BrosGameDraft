@@ -18,7 +18,7 @@ Read this first. It resolves conflicts between the three spec documents and defi
 - **Part 1's build phases 4–8 are void.** They put UI before the server. Use the merged phase order below.
 - **Part 2's `STORAGE_MODE` and `local` implementation are void.** There is no local mode. Supabase is the only store. Do not build a `Store` interface with two implementations — write directly against Supabase through server route handlers.
 - **Part 2's dev-only admin write route is void.** Admin is Supabase-backed and token-gated, reachable from a phone.
-- Part 1's rules, eligibility logic, catalog schema, seed script, and design tokens are **unchanged and authoritative**.
+- Part 1's rules, eligibility logic, catalog schema, and design tokens are **unchanged and authoritative**.
 - Part 1's RAWG seed script is void. Use 04-data-source-igdb.md for the data layer.
 
 ## Merged build order
@@ -26,11 +26,13 @@ Read this first. It resolves conflicts between the three spec documents and defi
 Build one phase at a time. Do not start a phase until the previous one runs.
 
 **Foundation**
+
 1. Scaffold — Next.js 15 App Router, TypeScript, Tailwind, Framer Motion, fonts, palette tokens
-2. Seed script → `catalog.json`; verify 1,500+ entries and 80+ per category
+2. Seed script → `catalog.json`; verify 80+ per category and a sane top-20.
 3. `engine.ts` pure reducer + vitest suite, seeded PRNG, no UI
 
 **Server**
+
 4. Supabase project, schema, RLS. Realtime ON for `matches`, OFF for `match_secrets` — verify by watching a live payload
 5. Route handlers wrapping `engine.ts`. Catalog imported server-side only. Score-stripped batch payloads
 6. Lobby — room codes, join links, slot claiming, rejoin handling
